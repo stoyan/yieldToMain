@@ -86,16 +86,16 @@ The function returns a Promise that resolves after yielding execution to the mai
 ## Development
 
 ```bash
-### Install dependencies
+# Install dependencies
 npm install
 
-### Build all formats and types
+# Build all formats and types
 npm run build
 
-### Run tests
+# Run tests
 npm test
 
-### Run tests in watch mode
+# Run tests in watch mode
 npm run test:watch
 ```
 
