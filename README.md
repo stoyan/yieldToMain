@@ -105,6 +105,8 @@ MIT
 
 ## Further Reading
 
+The `yieldToMain()` function is in no way my invention, I was just surprised it's not widely available in npm, so I decided to create a package for it. It's like a folk song that everyone knows, and yet it's origins are a little mirky. For more nitty-gritty details here's a selection of light (haha!) reading:
+
 - [Breaking Up Long Tasks](https://calendar.perfplanet.com/2022/breaking-up-long-tasks/) (2022) - Introduction to long tasks, INP metric, and various yielding strategies including isInputPending and postTask.
 - [Yielding to the Main Thread: How Breaking Up Tasks Can Fix INP](https://calendar.perfplanet.com/2023/yielding-main-thread-breaking-up-tasks-fix-inp/) (2023) - A deep dive into how yielding improves Interaction to Next Paint (INP) scores and overall responsiveness.
 - [Breaking Up with Long Tasks: How I Learned to Group Loops and Wield the Yield](https://calendar.perfplanet.com/2024/breaking-up-with-long-tasks-or-how-i-learned-to-group-loops-and-wield-the-yield/) (2024) - Advanced techniques for batching and optimizing yield calls, including frame rate considerations and background tab handling.
