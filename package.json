@@ -1,0 +1,48 @@
+{
+  "name": "yieldtomain",
+  "version": "1.0.0",
+  "description": "A utility function to yield to the main thread in JavaScript",
+  "type": "module",
+  "main": "dist/yieldToMain.umd.js",
+  "module": "dist/yieldToMain.esm.js",
+  "exports": {
+    ".": {
+      "require": "./dist/yieldToMain.cjs.js",
+      "import": "./dist/yieldToMain.esm.js",
+      "browser": "./dist/yieldToMain.browser.js",
+      "default": "./dist/yieldToMain.umd.js"
+    }
+  },
+  "types": "dist/yieldToMain.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c --silent && npm run types",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "prepublishOnly": "npm run build",
+    "types": "tsc src/yieldToMain.js --declaration --allowJs --emitDeclarationOnly --outDir dist"
+  },
+  "keywords": [
+    "yield",
+    "main-thread",
+    "performance",
+    "scheduling"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-node-resolve": "^15.3.1",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^30.0.0-beta.3",
+    "rollup": "^3.29.5",
+    "ts-jest": "^29.3.4",
+    "tslib": "^2.8.1",
+    "typescript": "^5.8.3"
+  }
+}

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>yieldToMain Demo - Heavy Computation</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      button {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        margin: 0.5rem;
+      }
+      .counter {
+        font-size: 2rem;
+        margin: 1rem 0;
+      }
+      #result {
+        margin: 1rem 0;
+        padding: 1rem;
+        background: #f0f0f0;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Heavy Computation Demo</h1>
+    <p>
+      This demo shows the difference between blocking and non-blocking
+      computation. The counter below should increment smoothly if the main
+      thread isn't blocked.
+    </p>
+
+    <div class="counter">
+      <button onclick="toggleCounter()">Start/Stop Counter</button>
+      <p>Counter: <span id="counter">0</span></p>
+    </div>
+
+    <div>
+      <button onclick="runBlockingDOM()">Run Blocking + DOM</button>
+      <button onclick="runYieldingDOM()">Run Yielding + DOM</button>
+      <button onclick="runBlocking()">Run Blocking Pure</button>
+      <button onclick="runYielding()">Run Yielding Pure</button>
+      <button onclick="clearLog()">Clear log</button>
+    </div>
+
+    <pre id="result">Not started</pre>
+
+    <script src="../dist/yieldToMain.browser.js"></script>
+    <script>
+      // Counter animation
+      let count = 0;
+      let isCounterRunning = true;
+      let animationFrame = null;
+
+      // Store run times for each type
+      const runTimes = {
+        blockingDOM: [],
+        yieldingDOM: [],
+        blockingPure: [],
+        yieldingPure: [],
+      };
+
+      function calculateMedian(numbers) {
+        if (numbers.length === 0) return 0;
+        const sorted = [...numbers].sort((a, b) => a - b);
+        const middle = Math.floor(sorted.length / 2);
+        if (sorted.length % 2 === 0) {
+          return ((sorted[middle - 1] + sorted[middle]) / 2).toFixed(2);
+        }
+        return sorted[middle].toFixed(2);
+      }
+
+      function updateStats(type, duration) {
+        runTimes[type].push(parseFloat(duration));
+        const median = calculateMedian(runTimes[type]);
+        return `\nRun #${runTimes[type].length} took ${duration}ms\nMedian of all runs: ${median}ms`;
+      }
+
+      function clearLog() {
+        const resultEl = document.getElementById('result');
+        resultEl.textContent = 'Not started';
+      }
+
+      function updateCounter() {
+        if (!isCounterRunning) return;
+        document.getElementById('counter').textContent = count++;
+        animationFrame = requestAnimationFrame(updateCounter);
+      }
+      updateCounter();
+
+      function toggleCounter() {
+        isCounterRunning = !isCounterRunning;
+        if (isCounterRunning) {
+          updateCounter();
+        } else if (animationFrame) {
+          cancelAnimationFrame(animationFrame);
+        }
+      }
+
+      // Heavy computation functions with DOM access
+      function heavyComputationBlockingDOM(iterations = 10000000) {
+        let result = 0;
+        for (let i = 0; i < iterations; i++) {
+          result +=
+            Math.sin(i) * Math.cos(i) +
+            document.getElementById('counter').offsetWidth;
+        }
+        return result;
+      }
+
+      async function heavyComputationYieldingDOM(iterations = 10000000) {
+        let result = 0;
+        const batchSize = 1000000;
+
+        for (let i = 0; i < iterations; i += batchSize) {
+          const end = Math.min(i + batchSize, iterations);
+          for (let j = i; j < end; j++) {
+            result +=
+              Math.sin(i) * Math.cos(i) +
+              document.getElementById('counter').offsetWidth;
+          }
+          await yieldToMain.yieldToMain();
+        }
+
+        return result;
+      }
+
+      // Pure computation functions (no DOM)
+      function heavyComputationBlocking(iterations = 100000000) {
+        let result = 0;
+        for (let i = 0; i < iterations; i++) {
+          result += Math.sin(i) * Math.cos(i);
+        }
+        return result;
+      }
+
+      async function heavyComputationYielding(iterations = 100000000) {
+        let result = 0;
+        const batchSize = 1000000;
+
+        for (let i = 0; i < iterations; i += batchSize) {
+          const end = Math.min(i + batchSize, iterations);
+          for (let j = i; j < end; j++) {
+            result += Math.sin(j) * Math.cos(j);
+          }
+          await yieldToMain.yieldToMain();
+        }
+
+        return result;
+      }
+
+      // Button handlers
+      async function runBlockingDOM() {
+        const resultEl = document.getElementById('result');
+        if (resultEl.textContent === 'Not started') resultEl.textContent = '';
+        resultEl.textContent += '\n\n=== Blocking computation with DOM ===';
+
+        await new Promise((resolve) => setTimeout(resolve, 50));
+
+        const start = performance.now();
+        const result = heavyComputationBlockingDOM();
+        const duration = (performance.now() - start).toFixed(2);
+
+        resultEl.textContent += updateStats('blockingDOM', duration);
+      }
+
+      async function runYieldingDOM() {
+        const resultEl = document.getElementById('result');
+        if (resultEl.textContent === 'Not started') resultEl.textContent = '';
+        resultEl.textContent += '\n\n=== Yielding computation with DOM ===';
+
+        const start = performance.now();
+        const result = await heavyComputationYieldingDOM();
+        const duration = (performance.now() - start).toFixed(2);
+
+        resultEl.textContent += updateStats('yieldingDOM', duration);
+      }
+
+      async function runBlocking() {
+        const resultEl = document.getElementById('result');
+        if (resultEl.textContent === 'Not started') resultEl.textContent = '';
+        resultEl.textContent += '\n\n=== Pure blocking computation ===';
+
+        await new Promise((resolve) => setTimeout(resolve, 50));
+
+        const start = performance.now();
+        const result = heavyComputationBlocking();
+        const duration = (performance.now() - start).toFixed(2);
+
+        resultEl.textContent += updateStats('blockingPure', duration);
+      }
+
+      async function runYielding() {
+        const resultEl = document.getElementById('result');
+        if (resultEl.textContent === 'Not started') resultEl.textContent = '';
+        resultEl.textContent += '\n\n=== Pure yielding computation ===';
+
+        const start = performance.now();
+        const result = await heavyComputationYielding();
+        const duration = (performance.now() - start).toFixed(2);
+
+        resultEl.textContent += updateStats('yieldingPure', duration);
+      }
+    </script>
+  </body>
+</html>
