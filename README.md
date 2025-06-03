@@ -86,16 +86,16 @@ The function returns a Promise that resolves after yielding execution to the mai
 ## Development
 
 ```bash
-### Install dependencies
+# Install dependencies
 npm install
 
-### Build all formats and types
+# Build all formats and types
 npm run build
 
-### Run tests
+# Run tests
 npm test
 
-### Run tests in watch mode
+# Run tests in watch mode
 npm run test:watch
 ```
 
@@ -104,6 +104,8 @@ npm run test:watch
 MIT
 
 ## Further Reading
+
+The `yieldToMain()` function is in no way my invention, I was just surprised it's not widely available in npm, so I decided to create a package for it. It's like a folk song that everyone knows, and yet it's origins are a little mirky. For more nitty-gritty details here's a selection of light (haha!) reading:
 
 - [Breaking Up Long Tasks](https://calendar.perfplanet.com/2022/breaking-up-long-tasks/) (2022) - Introduction to long tasks, INP metric, and various yielding strategies including isInputPending and postTask.
 - [Yielding to the Main Thread: How Breaking Up Tasks Can Fix INP](https://calendar.perfplanet.com/2023/yielding-main-thread-breaking-up-tasks-fix-inp/) (2023) - A deep dive into how yielding improves Interaction to Next Paint (INP) scores and overall responsiveness.
