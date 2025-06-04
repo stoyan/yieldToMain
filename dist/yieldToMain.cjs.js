@@ -39,5 +39,5 @@ function yieldToMain() {
   });
 }
 
-exports.yieldToMain = yieldToMain;
+module.exports = yieldToMain;
 //# sourceMappingURL=yieldToMain.cjs.js.map

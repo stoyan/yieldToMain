@@ -37,5 +37,5 @@ function yieldToMain() {
   });
 }
 
-export { yieldToMain };
+export { yieldToMain as default };
 //# sourceMappingURL=yieldToMain.esm.js.map

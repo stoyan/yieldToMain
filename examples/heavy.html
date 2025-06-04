@@ -123,7 +123,7 @@
               Math.sin(i) * Math.cos(i) +
               document.getElementById('counter').offsetWidth;
           }
-          await yieldToMain.yieldToMain();
+          await yieldToMain();
         }
 
         return result;
@@ -147,7 +147,7 @@
           for (let j = i; j < end; j++) {
             result += Math.sin(j) * Math.cos(j);
           }
-          await yieldToMain.yieldToMain();
+          await yieldToMain();
         }
 
         return result;

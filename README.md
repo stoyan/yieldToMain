@@ -1,6 +1,22 @@
 # yieldToMain
 
-A utility function to yield execution to the main thread in JavaScript, preventing UI blocking. Uses the modern `scheduler.yield()` when available, falling back to `setTimeout`.
+A utility function to yield execution to the main thread in JavaScript, preventing UI blocking. Uses `scheduler.yield()` when available, falling back to `setTimeout`.
+
+The gist is this:
+
+```js
+function yieldToMain() {
+  const scheduler = globalThis.scheduler;
+  if (scheduler && typeof scheduler.yield === 'function') {
+    return scheduler.yield();
+  }
+  return new Promise((resolve) => {
+    setTimeout(resolve, 0);
+  });
+}
+```
+
+Feel free to copy and paste this into your codebase. Or continue with using it as a module etc., as described below.
 
 ## Installation
 
@@ -45,7 +61,7 @@ async function heavyTask() {
 <script>
   async function nonBlockingTask() {
     for (let i = 0; i < 1000000; i++) {
-      if (i % 1000 === 0) await yieldToMain.yieldToMain();
+      if (i % 1000 === 0) await yieldToMain();
       // Heavy computation
     }
   }
@@ -60,6 +76,8 @@ Check out the `examples/heavy.html` demo to see the difference between blocking 
 - Pure computation examples (where "pure" means a JS loop without any DOM involvement)
 - DOM access in addition to computations
 - Multiple runs while reporting the median
+
+A live version of the demo is [right here](https://www.phpied.com/files/yieldToMain/examples/heavy.html).
 
 ## Build Formats
 

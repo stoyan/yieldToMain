@@ -37,4 +37,4 @@ function yieldToMain() {
   });
 }
 
-export {yieldToMain};
+export {yieldToMain as default};

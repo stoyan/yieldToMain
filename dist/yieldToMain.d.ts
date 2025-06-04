@@ -1,3 +1,4 @@
+export { yieldToMain as default };
 /**
  * Yields execution to the main thread, allowing other tasks to be processed.
  * Uses scheduler.yield() if available, falling back to setTimeout.
@@ -26,4 +27,4 @@
  *
  * @returns {Promise<void>} A promise that resolves after yielding to the main thread
  */
-export function yieldToMain(): Promise<void>;
+declare function yieldToMain(): Promise<void>;

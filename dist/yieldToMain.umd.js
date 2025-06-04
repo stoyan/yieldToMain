@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.yieldToMain = {}));
-})(this, (function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.yieldToMain = factory());
+})(this, (function () { 'use strict';
 
   /**
    * Yields execution to the main thread, allowing other tasks to be processed.
@@ -43,7 +43,7 @@
     });
   }
 
-  exports.yieldToMain = yieldToMain;
+  return yieldToMain;
 
 }));
 //# sourceMappingURL=yieldToMain.umd.js.map

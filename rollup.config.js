@@ -47,6 +47,7 @@ export default [
       format: 'iife',
       name: 'yieldToMain',
       sourcemap: true,
+      exports: 'named'
     },
     plugins: [
       resolve(),
