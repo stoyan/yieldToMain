@@ -1,6 +1,6 @@
 {
   "name": "yieldtomain",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A utility function to yield to the main thread in JavaScript",
   "type": "module",
   "main": "dist/yieldToMain.umd.js",
