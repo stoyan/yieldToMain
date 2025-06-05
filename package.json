@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "build": "rollup -c --silent && npm run types",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js & node --test __tests__/*.cjs",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js && node --test __tests__/*.cjs",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
     "prepublishOnly": "npm run build",
     "types": "tsc src/yieldToMain.js --declaration --allowJs --emitDeclarationOnly --outDir dist"
