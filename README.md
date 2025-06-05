@@ -83,7 +83,6 @@ A live version of the demo is [right here](https://www.phpied.com/files/yieldToM
 
 The library is distributed in multiple formats:
 
-- `dist/yieldToMain.umd.js` - Universal Module Definition (UMD) for Node.js and browsers
 - `dist/yieldToMain.esm.js` - ECMAScript Module
 - `dist/yieldToMain.cjs.js` - CommonJS
 - `dist/yieldToMain.browser.js` - Minified browser build with an IIFE that provides a global `yieldToMain()` function

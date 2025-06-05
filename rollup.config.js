@@ -10,17 +10,6 @@ const pkg = JSON.parse(readFileSync('./package.json'));
 await rm('./dist', {recursive: true, force: true});
 
 export default [
-  // UMD
-  {
-    input: 'src/yieldToMain.js',
-    output: {
-      name: 'yieldToMain',
-      file: 'dist/yieldToMain.umd.js',
-      format: 'umd',
-      sourcemap: true,
-    },
-    plugins: [resolve(), commonjs()],
-  },
   // ECMAScript module
   {
     input: 'src/yieldToMain.js',
@@ -35,7 +24,7 @@ export default [
   {
     input: 'src/yieldToMain.js',
     output: {
-      file: 'dist/yieldToMain.cjs.js',
+      file: 'dist/yieldToMain.cjs',
       format: 'cjs',
       sourcemap: true,
       exports: 'auto',

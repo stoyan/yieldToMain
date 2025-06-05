@@ -1,5 +1,12 @@
 import {jest} from '@jest/globals';
 import yieldToMain from '../src/yieldToMain.js';
+import yieldToMainESM from '../dist/yieldToMain.esm.js';
+
+describe('yieldToMainESM', () => {
+  it('should exist and give us a promise', () => {
+    expect(yieldToMainESM()).toBeInstanceOf(Promise);
+  });
+});
 
 describe('yieldToMain', () => {
   let originalScheduler;

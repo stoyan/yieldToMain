@@ -40,4 +40,4 @@ function yieldToMain() {
 }
 
 module.exports = yieldToMain;
-//# sourceMappingURL=yieldToMain.cjs.js.map
+//# sourceMappingURL=yieldToMain.cjs.map

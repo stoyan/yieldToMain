@@ -3,14 +3,12 @@
   "version": "1.0.3",
   "description": "A utility function to yield to the main thread in JavaScript",
   "type": "module",
-  "main": "dist/yieldToMain.umd.js",
   "module": "dist/yieldToMain.esm.js",
   "exports": {
     ".": {
       "require": "./dist/yieldToMain.cjs.js",
       "import": "./dist/yieldToMain.esm.js",
-      "browser": "./dist/yieldToMain.browser.js",
-      "default": "./dist/yieldToMain.umd.js"
+      "browser": "./dist/yieldToMain.browser.js"
     }
   },
   "types": "dist/yieldToMain.d.ts",
@@ -19,7 +17,7 @@
   ],
   "scripts": {
     "build": "rollup -c --silent && npm run types",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js & node --test __tests__/*.cjs",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
     "prepublishOnly": "npm run build",
     "types": "tsc src/yieldToMain.js --declaration --allowJs --emitDeclarationOnly --outDir dist"
