@@ -28,6 +28,7 @@ export default [
       file: pkg.module,
       format: 'es',
       sourcemap: true,
+      exports: 'auto',
     },
   },
   // CommonJS build
@@ -37,6 +38,7 @@ export default [
       file: 'dist/yieldToMain.cjs.js',
       format: 'cjs',
       sourcemap: true,
+      exports: 'auto',
     },
   },
   // Browser build, minified, with a `yieldToMain()` global
@@ -47,7 +49,7 @@ export default [
       format: 'iife',
       name: 'yieldToMain',
       sourcemap: true,
-      exports: 'named'
+      exports: 'auto',
     },
     plugins: [
       resolve(),

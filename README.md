@@ -31,7 +31,7 @@ The library can be used in a bunch o' JavaScript environments:
 ### ES Modules
 
 ```javascript
-import {yieldToMain} from 'yieldtomain';
+import yieldToMain from 'yieldtomain';
 
 async function processItems(items) {
   for (const item of items) {
@@ -44,7 +44,7 @@ async function processItems(items) {
 ### CommonJS
 
 ```javascript
-const {yieldToMain} = require('yieldtomain');
+const yieldToMain = require('yieldtomain');
 
 async function heavyTask() {
   for (let i = 0; i < 1000000; i++) {

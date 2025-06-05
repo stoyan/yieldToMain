@@ -1,5 +1,5 @@
 import {jest} from '@jest/globals';
-import {yieldToMain} from '../src/yieldToMain.js';
+import yieldToMain from '../src/yieldToMain.js';
 
 describe('yieldToMain', () => {
   let originalScheduler;

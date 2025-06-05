@@ -1,4 +1,4 @@
-export { yieldToMain as default };
+export default yieldToMain;
 /**
  * Yields execution to the main thread, allowing other tasks to be processed.
  * Uses scheduler.yield() if available, falling back to setTimeout.
