@@ -1,0 +1,70 @@
+Chrome scheduler
+
+
+=== Blocking computation with DOM ===
+Run #3 took 6131.20ms
+Median of all runs: 6131.20ms
+
+=== Yielding computation with DOM ===
+Run #3 took 5565.30ms
+Median of all runs: 5652.40ms
+
+=== Pure blocking computation ===
+Run #3 took 3187.20ms
+Median of all runs: 3161.50ms
+
+=== Pure yielding computation ===
+Run #3 took 3200.80ms
+Median of all runs: 3200.80ms
+
+
+Chrome setTimeout
+
+=== Blocking computation with DOM ===
+Run #3 took 6141.50ms
+Median of all runs: 6210.40ms
+
+=== Yielding computation with DOM ===
+Run #3 took 5769.80ms
+Median of all runs: 5769.80ms
+
+=== Pure blocking computation ===
+Run #3 took 3155.30ms
+Median of all runs: 3155.30ms
+
+=== Pure yielding computation ===
+Run #3 took 3656.00ms
+Median of all runs: 3673.90ms
+
+rAF
+
+
+=== Blocking computation with DOM ===
+Run #3 took 5835.40ms
+Median of all runs: 5835.40ms
+
+=== Yielding computation with DOM ===
+Run #3 took 5436.00ms
+Median of all runs: 5444.40ms
+
+=== Pure blocking computation ===
+Run #3 took 3152.10ms
+Median of all runs: 3148.80ms
+
+=== Pure yielding computation ===
+Run #3 took 3248.20ms
+Median of all runs: 3248.20ms
+
+
+
+
+
+
+
+------
+
+
+
+
+
+
